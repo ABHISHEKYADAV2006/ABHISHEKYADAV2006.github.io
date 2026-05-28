@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Yadav — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #18181f;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --text: #f0f0f8;
+    --muted: #8888aa;
+    --border: rgba(108,99,255,0.18);
+    --card: #14141c;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--accent2); letter-spacing: -0.5px; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 2.5rem 4rem;
+    max-width: 1100px; margin: 0 auto;
+    position: relative;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(108,99,255,0.12);
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 0.82rem; color: var(--accent2); font-weight: 500;
+    margin-bottom: 1.5rem; width: fit-content;
+  }
+  .hero-tag span { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.4)} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    letter-spacing: -2px;
+    margin-bottom: 1.2rem;
+  }
+  h1 .name-accent { color: var(--accent2); }
+
+  .hero-sub {
+    font-size: 1.15rem; color: var(--muted); max-width: 560px;
+    margin-bottom: 2.5rem; font-weight: 300;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #7c74ff; transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); transform: translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding: 5rem 2.5rem; max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700; letter-spacing: -1px; margin-bottom: 3rem;
+    color: var(--text);
+  }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: rgba(108,99,255,0.5); transform: translateY(-3px); }
+  .skill-card h4 { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--accent2); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2);
+    border-radius: 6px; padding: 3px 10px;
+    font-size: 0.8rem; color: var(--muted);
+  }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .project-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .project-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+  .project-stat { font-size: 0.82rem; color: var(--accent2); font-weight: 500; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem; }
+
+  /* EXPERIENCE */
+  .exp-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem; margin-bottom: 1rem;
+    border-left: 3px solid var(--accent);
+  }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; }
+  .exp-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; }
+  .exp-company { color: var(--accent2); font-size: 0.9rem; margin-top: 2px; }
+  .exp-date { font-size: 0.82rem; color: var(--muted); background: var(--bg3); padding: 4px 12px; border-radius: 100px; white-space: nowrap; }
+  .exp-item ul { list-style: none; }
+  .exp-item ul li { font-size: 0.9rem; color: var(--muted); padding: 4px 0; padding-left: 1.2rem; position: relative; }
+  .exp-item ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; top: 5px; }
+
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(108,99,255,0.4); }
+  .cert-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .cert-name { font-size: 0.9rem; font-weight: 500; margin-bottom: 2px; }
+  .cert-issuer { font-size: 0.8rem; color: var(--muted); }
+  .cert-year { font-size: 0.75rem; color: var(--accent2); margin-top: 4px; }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .contact-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem;
+    text-align: center; text-decoration: none; color: var(--text);
+    transition: all 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent2); transform: translateY(-3px); color: var(--accent2); }
+  .contact-item .ci-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .contact-item .ci-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-item .ci-val { font-size: 0.9rem; font-weight: 500; word-break: break-all; }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; }
+
+  @media(max-width:640px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">AY</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag"><span></span> Open to remote freelance opportunities</div>
+  <h1>Abhishek<br><span class="name-accent">Yadav</span></h1>
+  <p class="hero-sub">Full Stack Developer & AI/ML Enthusiast building scalable web apps, automating workflows, and integrating AI into real-world products. Based in Uttar Pradesh, India.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Get In Touch</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I work with</div>
+  <h2>Tech Stack</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h4>Languages</h4>
+      <div class="skill-tags">
+        <span class="tag">JavaScript</span>
+        <span class="tag">Python</span>
+        <span class="tag">C/C++</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Frontend</h4>
+      <div class="skill-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Next.js</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Backend</h4>
+      <div class="skill-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">RESTful APIs</span>
+        <span class="tag">WebSocket</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Database & Cloud</h4>
+      <div class="skill-tags">
+        <span class="tag">MongoDB Atlas</span>
+        <span class="tag">Appwrite</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>AI / ML</h4>
+      <div class="skill-tags">
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Gemini API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <h4>Tools</h4>
+      <div class="skill-tags">
+        <span class="tag">Git / GitHub</span>
+        <span class="tag">Google OAuth</span>
+        <span class="tag">MS Office</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <h2>Featured Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-icon">🎓</div>
+      <h3>Result Generation & Management System</h3>
+      <p>Automated student result management for universities — scalable MongoDB database, admin dashboard, and RESTful APIs.</p>
+      <div class="project-stat">⚡ Reduced manual effort by 75%</div>
+      <div class="project-tech">
+        <span class="tag">React.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">MongoDB Atlas</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">🤖</div>
+      <h3>AI-Powered Conversational App</h3>
+      <p>Natural language AI chat platform with Gemini API integration, Google OAuth, and a real-time response system.</p>
+      <div class="project-stat">✅ 95%+ response accuracy</div>
+      <div class="project-tech">
+        <span class="tag">Next.js</span>
+        <span class="tag">Gemini API</span>
+        <span class="tag">Google OAuth</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">💬</div>
+      <h3>Real-Time Chat Application</h3>
+      <p>Instant messaging platform with WebSocket integration and MongoDB for persistent message history across devices.</p>
+      <div class="project-stat">🔄 Real-time WebSocket sync</div>
+      <div class="project-tech">
+        <span class="tag">React.js</span>
+        <span class="tag">WebSocket</span>
+        <span class="tag">MongoDB</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon">📝</div>
+      <h3>Online Based Testing Platform</h3>
+      <p>Scalable exam platform with dynamic test flows, real-time validation, and role-based access control.</p>
+      <div class="project-stat">👥 500+ concurrent users</div>
+      <div class="project-tech">
+        <span class="tag">React.js</span>
+        <span class="tag">Express</span>
+        <span class="tag">MongoDB</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work history</div>
+  <h2>Experience</h2>
+  <div class="exp-item">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Full Stack Developer Intern</div>
+        <div class="exp-company">Softpro India Pvt. Ltd.</div>
+      </div>
+      <span class="exp-date">Jun – Aug 2025</span>
+    </div>
+    <ul>
+      <li>Built Online Based Testing platform serving 500+ concurrent users with React.js, Node.js/Express, and MongoDB</li>
+      <li>Engineered responsive UI with dynamic test flows, improving user experience by 40%</li>
+      <li>Implemented secure authentication with role-based access control</li>
+      <li>Reduced critical bugs by 30% through systematic debugging of live systems</li>
+    </ul>
+  </div>
+
+  <div class="section-label" style="margin-top:2.5rem;">Education</div>
+  <div class="exp-item" style="border-left-color: var(--accent2);">
+    <div class="exp-header">
+      <div>
+        <div class="exp-title">Bachelor of Computer Application (BCA)</div>
+        <div class="exp-company">ITS College of Professional Studies — CGPA: 6.66</div>
+      </div>
+      <span class="exp-date">2023 – 2026</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section>
+  <div class="section-label">Credentials</div>
+  <h2>Certifications</h2>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🧠</div>
+      <div>
+        <div class="cert-name">AI & Machine Learning Cohort</div>
+        <div class="cert-issuer">Shape My Skills by Ducat</div>
+        <div class="cert-year">January 2026</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💻</div>
+      <div>
+        <div class="cert-name">Full Stack Web Development</div>
+        <div class="cert-issuer">Softpro India</div>
+        <div class="cert-year">August 2025</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔢</div>
+      <div>
+        <div class="cert-name">Data Structures & Algorithms Prep LITE</div>
+        <div class="cert-issuer">Nishant Chhaar</div>
+        <div class="cert-year">October 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <h2>Get In Touch</h2>
+  <div class="contact-grid">
+    <a href="mailto:abhishekyadav4317@gmail.com" class="contact-item">
+      <div class="ci-icon">✉️</div>
+      <div class="ci-label">Email</div>
+      <div class="ci-val">abhishekyadav4317@gmail.com</div>
+    </a>
+    <a href="https://linkedin.com/in/abhishek-yadav-289944298" target="_blank" class="contact-item">
+      <div class="ci-icon">💼</div>
+      <div class="ci-label">LinkedIn</div>
+      <div class="ci-val">abhishek-yadav-289944298</div>
+    </a>
+    <a href="https://github.com/ABHISHEKYADAV2006" target="_blank" class="contact-item">
+      <div class="ci-icon">🐙</div>
+      <div class="ci-label">GitHub</div>
+      <div class="ci-val">ABHISHEKYADAV2006</div>
+    </a>
+    <div class="contact-item" style="cursor:default;">
+      <div class="ci-icon">📍</div>
+      <div class="ci-label">Location</div>
+      <div class="ci-val">Bulandshahr, UP, India</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Abhishek Yadav · Built with HTML, CSS & JavaScript</p>
+</footer>
+
+</body>
+</html>
